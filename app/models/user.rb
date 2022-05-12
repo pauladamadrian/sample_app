@@ -8,7 +8,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true  # it will not allow users to sign in with an empty password because has_secure_password includes a presence validation
 
   #* Returns the hash digest of the given string.
   def User.digest(string)   # OR def self.digest(string)

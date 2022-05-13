@@ -74,9 +74,13 @@ Rails.application.configure do
     :authentication => :plain,
     :user_name => 'apikey',
     :password => ENV['SENDGRID_API_KEY'],
+    # :user_name => 'ENV['SENDGRID_USERNAME']',
+    # :password => ENV['SENDGRID_PASSWORD'],
     :domain => 'heroku.com',
     :enable_starttls_auto => true
   }
+    # :user_name => 'apikey',
+    # :password => ENV['SENDGRID_API_KEY'],  (log in on sendgrid and generate api key)
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).

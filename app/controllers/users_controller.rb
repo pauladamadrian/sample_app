@@ -5,12 +5,13 @@ class UsersController < ApplicationController
 
   def index
     # @users = User.all
-    @users = User.paginate(page: params[:page])  # params[:page] is generated automatically by will_paginate gem
+    # @users = User.paginate(page: params[:page])  # params[:page] is generated automatically by will_paginate gem
+    @users = User.where(activated: true).paginate(page: params[:page])
   end
 
   def show
     @user = User.find(params[:id])
-    # debugger
+    redirect_to root_url and return unless @user.activated?   # AND and && are nearly identical, but the latter has a higher precedence
   end
 
   def new
@@ -20,9 +21,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user     # OR redirect_to user_url(@user)
+      @user.send_activation_email
+      flash[:info] = "Please check your email to activate your acccount."
+      redirect_to root_url
     else
       render 'new'
     end

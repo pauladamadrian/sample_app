@@ -1,0 +1,6 @@
+<% if @feed_items.any? %>
+  <ol class="microposts">
+    <%= render @feed_items %>   <!-- @feed_items elems have class Micropost, so Rails will look for a partial with the cprrespoding name (_micropost.html.erb) -->
+  </ol>
+  <%= will_paginate @feed_items, params: { controller: :static_pages, action: :home } %>   <!-- in this case if we don't specify the params it will throw an error in some cases -->
+<% end %>

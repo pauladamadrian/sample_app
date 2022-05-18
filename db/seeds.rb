@@ -19,3 +19,11 @@ users = User.order(:created_at).take(6)
 end
 
 # The create! method is just like the create method, except it raises an exception for an invalid user rather than returning false
+
+#* Create following relationships.
+users = User.all
+user = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }

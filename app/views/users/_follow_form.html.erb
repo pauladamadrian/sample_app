@@ -1,0 +1,9 @@
+<% unless current_user?(@user) %>  <!-- executes if the condition is false, aka we are not on the logged in user page, because he can't follow himself -->
+  <div id="follow_form">
+    <% if current_user.following?(@user) %>
+      <%= render 'unfollow' %>
+    <% else %>
+      <%= render 'follow' %>
+    <% end %>
+  </div>
+<%end %>
